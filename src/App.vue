@@ -1,30 +1,60 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="wrap">
+    <h1>Vue Rogue</h1>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="panel">
+          <h3>Controls</h3>
+          <div class="muted">Arrow Keys / WASD to move</div>
+          <div class="muted">R to go down a level (regenerate)</div>
+        </div>
+      </aside>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
+<script lang="ts" setup>
+import { useKeyboard } from './composables/useKeyboard'
+import { useGameStore } from './stores/gameStore'
+
+const store = useGameStore()
+
+useKeyboard({
+  onMove: store.move,
+  onRegenerate: () => store.regenerate(true)
+})
+</script>
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.wrap {
+  max-width: 1100px;
+  margin: 20px auto;
+  padding: 12px;
+  color: #e6e6e6;
+  background: #121212;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  border: 1px solid #101010;
+  border-radius: 4px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+h1 {
+  margin: 0 0 8px;
+  font-weight: 800;
+  font-size: 20px;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+.layout {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
 }
+.sidebar {
+  width: 220px;
+}
+.panel {
+  background: #0e0f12;
+  border: 1px solid #22262b;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.muted { color: #9aa1a6; font-size: 13px; }
 </style>
