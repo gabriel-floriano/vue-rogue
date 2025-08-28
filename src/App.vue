@@ -1,8 +1,24 @@
 <template>
   <div class="wrap">
     <h1>Vue Rogue</h1>
+
+    <Hud
+      :game="store.game"
+      :stats="store.stats"
+      :level="store.level"
+      :messages="store.messages"
+    />
+
     <div class="layout">
       <aside class="sidebar">
+        <div class="panel">
+          <h3>Inventory</h3>
+          <div v-if="store.inventory.length === 0" class="muted">empty</div>
+          <ul>
+            <li v-for="(it, i) in store.inventory" :key="i">{{ it.name }} ({{ it.glyph }})</li>
+          </ul>
+        </div>
+
         <div class="panel">
           <h3>Controls</h3>
           <div class="muted">Arrow Keys / WASD to move</div>
@@ -14,6 +30,7 @@
 </template>
 
 <script lang="ts" setup>
+import Hud from './components/Hud.vue'
 import { useKeyboard } from './composables/useKeyboard'
 import { useGameStore } from './stores/gameStore'
 
