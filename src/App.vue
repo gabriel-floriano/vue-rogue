@@ -10,6 +10,15 @@
     />
 
     <div class="layout">
+      <GameScreen
+        :game="store.game"
+        :width="store.WIDTH"
+        :height="store.HEIGHT"
+        :view-radius="10"
+        :viewport-width="40"
+        :viewport-height="20"
+      />
+
       <aside class="sidebar">
         <div class="panel">
           <h3>Inventory</h3>
@@ -31,6 +40,7 @@
 
 <script lang="ts" setup>
 import Hud from './components/Hud.vue'
+import GameScreen from './components/GameScreen.vue'
 import { useKeyboard } from './composables/useKeyboard'
 import { useGameStore } from './stores/gameStore'
 

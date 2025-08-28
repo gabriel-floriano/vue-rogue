@@ -6,8 +6,8 @@ import {
   type Game
 } from '../engine/rogue'
 
-const WIDTH = 0
-const HEIGHT = 0
+const WIDTH = 80
+const HEIGHT = 30
 
 export const useGameStore = defineStore('game', () => {
   const game = reactive(createGame(WIDTH, HEIGHT))
@@ -72,7 +72,6 @@ export const useGameStore = defineStore('game', () => {
     messages.value.unshift(msg)
     if (messages.value.length > 8) messages.value.pop()
   }
-
 
   init()
 
